@@ -1,16 +1,12 @@
 {
-  "name": "floor-app",
+  "name": "facility-emar",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "private": true,
+  "description": "Rounds provides Convex-backed resident safety, medication workflows, family-update previews, administration records, and supervised restart.",
+  "type": "module",
   "dependencies": {
-    "convex": "^1.43.0"
+    "@modelcontextprotocol/sdk": "^1.28.0",
+    "zod": "^3.24.0",
+    "tsx": "^4.20.2"
   }
 }

@@ -1,0 +1,152 @@
+{
+  "originalPrompt": "Create an app for nursing home staff. It should have tools: find_resident (look up a resident by name and return room, allergies, fall risk, code status), get_due_meds (list medications due this hour, optionally filtered by resident name), check_med_administration (check if a medication is safe to give — returns either a confirmation card with Five Rights, or a blocked warning for allergy conflicts or duplicate doses), and log_med_administration (commit the medication as given after confirmation).\"",
+  "preview": {
+    "utterances": [
+      "Find resident Dorothy Chen",
+      "What medications are due for Harold Reed this hour?",
+      "Check whether Wei Cheng can receive Metoprolol"
+    ],
+    "toolPreviews": [
+      {
+        "tool": "find_resident",
+        "sampleArgs": {
+          "name": "Dorothy Chen"
+        },
+        "stressCases": [
+          {
+            "state": "long-text",
+            "sampleArgs": {
+              "name": "Dorothy Chen"
+            },
+            "sampleData": {
+              "resident": {
+                "name": "Dorothy Chen — preferred display name with an exceptionally long facility annotation that continues beyond one hundred characters for truncation testing",
+                "room": "214-B",
+                "allergies": [
+                  "Penicillin"
+                ],
+                "fallRisk": "High",
+                "codeStatus": "DNR"
+              }
+            },
+            "expected": "The resident name and safety summary truncate without pushing the room off-card."
+          }
+        ]
+      },
+      {
+        "tool": "get_due_meds",
+        "sampleArgs": {
+          "resident_name": "Harold Reed"
+        },
+        "stressCases": [
+          {
+            "state": "empty",
+            "sampleArgs": {
+              "resident_name": "Harold Reed"
+            },
+            "sampleData": {
+              "medications": []
+            },
+            "expected": "A compact branded state says no medications are due for Harold Reed this hour."
+          }
+        ]
+      },
+      {
+        "tool": "check_med_administration",
+        "sampleArgs": {
+          "resident_name": "Wei Cheng",
+          "medication_name": "Metoprolol 25 mg"
+        },
+        "stressCases": [
+          {
+            "state": "error",
+            "sampleArgs": {
+              "resident_name": "Wei Cheng",
+              "medication_name": "Metoprolol 25 mg"
+            },
+            "sampleData": {
+              "status": "error",
+              "message": "Allergy data is unavailable."
+            },
+            "expected": "The medication-safety card fails closed and says verification is unavailable."
+          }
+        ]
+      },
+      {
+        "tool": "draft_family_update",
+        "sampleArgs": {
+          "resident_name": "Dorothy Chen",
+          "update_focus": "Therapy and appetite",
+          "tone": "warm"
+        },
+        "stressCases": [
+          {
+            "state": "long-text",
+            "sampleArgs": {
+              "resident_name": "Dorothy Chen",
+              "update_focus": "Therapy, appetite, sleep, activities, and all documented care-team observations without unsupported promises.",
+              "tone": "reassuring"
+            },
+            "sampleData": {
+              "draft": {
+                "residentName": "Dorothy Chen",
+                "previewText": "Hello, this is a detailed review-only update about Dorothy's therapy participation, appetite, sleep, activities, care-team observations, social engagement, scheduled routines, and general progress. Staff should carefully review this preview before copying it into a separate connected communication tool because this integration has no delivery capability."
+              }
+            },
+            "expected": "The preview-only card clamps the long update and clearly states that nothing was sent."
+          }
+        ]
+      },
+      {
+        "tool": "log_med_administration",
+        "sampleArgs": {
+          "resident_name": "Harold Reed",
+          "medication_name": "Metoprolol 25 mg",
+          "dose": "25 mg",
+          "route": "Oral",
+          "scheduled_time": "2026-08-09T09:00:00-04:00",
+          "given_at": "2026-08-09T09:03:00-04:00"
+        },
+        "stressCases": [
+          {
+            "state": "long-text",
+            "sampleArgs": {
+              "resident_name": "Harold Reed",
+              "medication_name": "Metoprolol tartrate extended release tablet with an exceptionally long formulary display description that exceeds one hundred characters",
+              "dose": "25 milligrams",
+              "route": "By mouth",
+              "scheduled_time": "2026-08-09T09:00:00-04:00",
+              "given_at": "2026-08-09T09:03:00-04:00"
+            },
+            "sampleData": {
+              "status": "pending",
+              "residentName": "Harold Reed",
+              "medication": "Metoprolol tartrate extended release tablet with an exceptionally long formulary display description that also continues beyond one hundred characters"
+            },
+            "expected": "Editable confirmation values remain contained and scannable."
+          }
+        ]
+      },
+      {
+        "tool": "restart_mcp_server",
+        "sampleArgs": {
+          "reason": "Pick up the latest seeded resident data"
+        },
+        "stressCases": [
+          {
+            "state": "long-text",
+            "sampleArgs": {
+              "reason": "Reload Rounds after the seeded resident data refresh so the current Dorothy Chen, Harold Reed, and Wei Cheng records are used."
+            },
+            "sampleData": {
+              "status": "pending_restart",
+              "reason": "Reload the local Rounds service after a backend refresh so every resident, medication schedule, safety decision, and administration workflow uses the latest available seeded data."
+            },
+            "expected": "The restart reason clips safely above the reserved confirmation area."
+          }
+        ]
+      }
+    ]
+  },
+  "updatedAt": "2026-08-09T22:21:56.654Z"
+}
