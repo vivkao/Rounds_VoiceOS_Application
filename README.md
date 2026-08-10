@@ -1,5 +1,5 @@
 # Rounds - VoiceOS Application
-<img width="607" height="596" alt="Screenshot 2026-08-09 at 6 04 28 PM" src="https://github.com/user-attachments/assets/7ed07074-ebfc-4d38-9b1c-03eb54b4d6dd" />
+<img width="1037" height="584" alt="Screenshot 2026-08-09 at 6 10 52 PM" src="https://github.com/user-attachments/assets/93a65a59-073b-4a63-9a44-fd86baf54bb3" />
 
 App Link: https://api.voiceos.com/integration-share/C_XmkK9wu-qs/page
 
