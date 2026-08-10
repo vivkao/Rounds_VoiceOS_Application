@@ -2,6 +2,7 @@
 <img width="1037" height="584" alt="Screenshot 2026-08-09 at 6 10 52 PM" src="https://github.com/user-attachments/assets/93a65a59-073b-4a63-9a44-fd86baf54bb3" />
 
 App Link: https://api.voiceos.com/integration-share/C_XmkK9wu-qs/page
+
 A voice-native shift assistant for skilled nursing facilities, built on **VoiceOS** with a **Convex** backend.
 Built at the VoiceOS Hackathon · 8/9/2026 · Frontier Tower, SF
 
